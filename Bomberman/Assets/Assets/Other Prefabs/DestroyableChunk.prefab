@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 6572923195559831594}
   - component: {fileID: 6572923195559831595}
   - component: {fileID: 6572923195559831592}
+  - component: {fileID: -2172895389860698982}
   m_Layer: 0
   m_Name: DestroyableChunk
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -92,3 +93,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-2172895389860698982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6572923195559831593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c297441572b09ec4590fef7a1ab65b42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  diyingMat: {fileID: 2100000, guid: c05c9ad0f071a57479f869507b7a4014, type: 2}

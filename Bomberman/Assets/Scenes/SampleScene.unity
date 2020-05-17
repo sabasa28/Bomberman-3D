@@ -135,8 +135,8 @@ GameObject:
   - component: {fileID: 279542436}
   - component: {fileID: 279542437}
   m_Layer: 0
-  m_Name: Capsule
-  m_TagString: Untagged
+  m_Name: Player3rdP
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -228,6 +228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d817bd0a16ea24e949c4d7027d788c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bomb: {fileID: 8312776146920961730, guid: 1ad37dd7675ad4540a61d6a38b089ada, type: 3}
   speed: 25
 --- !u!54 &279542437
 Rigidbody:
@@ -280,7 +281,7 @@ MonoBehaviour:
   chunkNotDestroyable: {fileID: 8337614479068068028, guid: adf53d085aa08b947b63a355dbe5b0ba,
     type: 3}
   mapWidth: 13
-  mapDepth: 33
+  mapDepth: 9
 --- !u!4 &610936996
 Transform:
   m_ObjectHideFlags: 0

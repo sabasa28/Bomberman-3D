@@ -19,6 +19,7 @@ public class GameplayController : MonoBehaviour
     {
         chunkOffset = chunkSize / 2;
         InstantiateMap();
+        Debug.Log(mapChunks.Count);
     }
 
     void InstantiateMap()
@@ -30,11 +31,12 @@ public class GameplayController : MonoBehaviour
         {
             for (int j = 0; j < mapDepth; j++)
             {
-                int aux = Random.Range(0, 3);
+                int aux = Random.Range(1, 4);
 
                 if ((i % 2 == 0 && (j+1) % 2 != 0)) aux = 0;
                 else if (i % mapWidth == 0 || (i + 1) % mapWidth == 0 || j % mapDepth == 0 || (j + 1) % mapDepth == 0) aux = 0;
-                else aux = 2;
+
+                if (i == 1 && j == 1) aux = 2;
 
                 switch (aux)
                 {
@@ -45,6 +47,7 @@ public class GameplayController : MonoBehaviour
                         mapChunks.Add(Instantiate(chunkDestroyable, new Vector3(i * chunkSize + chunkOffset, chunkOffset, j * chunkSize + chunkOffset), Quaternion.identity));
                         break;
                     case 2:
+                    case 3:
                         mapChunks.Add(null);
                         break;
                 }
