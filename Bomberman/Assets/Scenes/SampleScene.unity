@@ -280,8 +280,10 @@ MonoBehaviour:
     type: 3}
   chunkNotDestroyable: {fileID: 8337614479068068028, guid: adf53d085aa08b947b63a355dbe5b0ba,
     type: 3}
+  enemy: {fileID: 4656501215504291727, guid: 6cb72c3cd1846094fa0b2a8ffa2c4a21, type: 3}
   mapWidth: 13
   mapDepth: 9
+  enemiesAmount: 10
 --- !u!4 &610936996
 Transform:
   m_ObjectHideFlags: 0
@@ -381,7 +383,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 12927, y: 3, z: 7464}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

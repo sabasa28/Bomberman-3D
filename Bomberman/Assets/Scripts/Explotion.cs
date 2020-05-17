@@ -60,10 +60,6 @@ public class Explotion : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-        { 
-            Destroy(other.gameObject);
-        }
         if (other.CompareTag("Wall"))
         {
             Destroy(gameObject);

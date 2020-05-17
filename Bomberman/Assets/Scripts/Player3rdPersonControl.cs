@@ -8,15 +8,19 @@ public class Player3rdPersonControl : MonoBehaviour
     public float speed;
     float hor;
     float ver;
+    Vector3 initPos;
+    Rigidbody rb;
     void Start()
     {
-        
+        initPos = transform.position;
+        rb = GetComponent<Rigidbody>();
     }
 
     //SIGUIENTE A HACER, HACER QUE SE MUEVA POR LAS LINEAS Y QUE SI ESTA EN UN CUADRADO QUE PUEDA MOVERSE PARA ABAJO HAGA UN LERP PARA CENTRARSE MIENTRAS SE CENTRA O ALGO ASÍ
 
     void Update()
     {
+        
         hor = Input.GetAxisRaw("Horizontal");
         ver = Input.GetAxisRaw("Vertical");
         if (hor != 0) ver = 0;
@@ -54,8 +58,22 @@ public class Player3rdPersonControl : MonoBehaviour
             if (aux <= 10.0f && hor != 0) transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x - aux, transform.position.y, transform.position.z), 0.1f);
         }
         Vector3 movement = new Vector3(ver, 0, -hor) * speed;
-
         transform.position += movement * Time.deltaTime;
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Explotion"))
+        {
+            transform.position = initPos;
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.CompareTag("Enemy"))
+        {
+            transform.position = initPos;
+            rb.velocity = Vector3.zero;
+        }
     }
 
 

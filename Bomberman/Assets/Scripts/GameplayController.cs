@@ -7,19 +7,21 @@ public class GameplayController : MonoBehaviour
     public GameObject floor;
     public GameObject chunkDestroyable;
     public GameObject chunkNotDestroyable;
+    public GameObject enemy;
 
     public int mapWidth;
     public int mapDepth;
+    public int enemiesAmount;
 
     int chunkSize = 10;
     int chunkOffset;
 
-    List<GameObject> mapChunks = new List<GameObject>();
+    List<GameObject> mapChunks = new List<GameObject>(); //necesario?
     void Start()
     {
         chunkOffset = chunkSize / 2;
         InstantiateMap();
-        Debug.Log(mapChunks.Count);
+        InstantiateEnemies();
     }
 
     void InstantiateMap()
@@ -36,7 +38,7 @@ public class GameplayController : MonoBehaviour
                 if ((i % 2 == 0 && (j+1) % 2 != 0)) aux = 0;
                 else if (i % mapWidth == 0 || (i + 1) % mapWidth == 0 || j % mapDepth == 0 || (j + 1) % mapDepth == 0) aux = 0;
 
-                if (i == 1 && j == 1) aux = 2;
+                if ((i == 1 && j == 1)||(i==2&&j==1)||i==1&&j==2) aux = 2;
 
                 switch (aux)
                 {
@@ -52,6 +54,25 @@ public class GameplayController : MonoBehaviour
                         break;
                 }
             }
+        }
+    }
+    void InstantiateEnemies()
+    {
+        List<int> freeSpaces = new List<int>();
+        for (int i = 0; i < mapChunks.Count; i++)
+        {
+            if (mapChunks[i] == null)
+            {
+                if (i != (1 * mapDepth + 1) && i != (1 * mapDepth + 2) && i != (2 * mapDepth + 1)) 
+                    freeSpaces.Add(i);
+            }
+        }
+        if (freeSpaces.Count / 2 < enemiesAmount) enemiesAmount = freeSpaces.Count / 2;
+        for (int i = 0; i < enemiesAmount; i++)
+        {
+            int aux = Random.Range(0, freeSpaces.Count-1);
+            Instantiate(enemy,new Vector3(chunkSize * (freeSpaces[aux] / mapDepth) + chunkOffset, chunkOffset, chunkSize * (freeSpaces[aux] % mapDepth) + chunkOffset),Quaternion.identity);
+            freeSpaces.RemoveAt(aux);
         }
     }
 
