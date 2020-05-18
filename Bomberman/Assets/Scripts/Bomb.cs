@@ -1,12 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Bomb : MonoBehaviour
 {
+    public int explotionRadio = 2;
     public GameObject explotion;
     Collider coll;
-    int explotionRadio = 2;
+    public Action Die;
     void Start()
     {
         coll = GetComponent<Collider>();
@@ -37,7 +39,7 @@ public class Bomb : MonoBehaviour
         aux = (transform.position.z + 5) % 20;
         if (aux > 15 || aux < 5)
         {
-            Explotion temp = Instantiate(explotion, new Vector3(transform.position.x - 10, transform.position.y, transform.position.z), Quaternion.identity).GetComponent<Explotion>();
+            Explotion temp = Instantiate(explotion, new Vector3(transform.position.x - GameplayController.chunkSize, transform.position.y, transform.position.z), Quaternion.identity).GetComponent<Explotion>();
             temp.explotionsLeft = explotionRadio - 1;
             temp.sideToInsantiate = Explotion.Side.back;
 
@@ -60,4 +62,8 @@ public class Bomb : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private void OnDestroy()
+    {
+        Die();
+    }
 }

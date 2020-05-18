@@ -5,20 +5,22 @@ using UnityEngine;
 
 public class Player3rdPersonControl : MonoBehaviour
 {
+    public Action <bool> updateBombAmount;
     public GameObject bomb;
     public float speed;
     float hor;
     float ver;
     Vector3 initPos;
     Rigidbody rb;
-    int lives = 2;
+    public int lives = 2;
+    public int explotionRatio;
+    public int maxBombAmount;
+    int bombAmount = 0;
     void Start()
     {
         initPos = transform.position;
         rb = GetComponent<Rigidbody>();
     }
-
-    //SIGUIENTE A HACER, HACER QUE SE MUEVA POR LAS LINEAS Y QUE SI ESTA EN UN CUADRADO QUE PUEDA MOVERSE PARA ABAJO HAGA UN LERP PARA CENTRARSE MIENTRAS SE CENTRA O ALGO ASÍ
 
     void Update()
     {
@@ -29,7 +31,7 @@ public class Player3rdPersonControl : MonoBehaviour
 
         
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space)&&bombAmount<maxBombAmount)
         {
             float aux1 = (transform.position.x+5) % 10;
             if (aux1 > 5) aux1 = transform.position.x + (10.0f - aux1);
@@ -38,8 +40,10 @@ public class Player3rdPersonControl : MonoBehaviour
             float aux2 = (transform.position.z+5) % 10;
             if (aux2 > 5) aux2 = transform.position.z + (10.0f - aux2);
             else aux2 = transform.position.z - aux2;
-            
-            Instantiate(bomb, new Vector3(aux1,2.5f,aux2), Quaternion.identity);
+            Bomb tempBomb= Instantiate(bomb, new Vector3(aux1,2.5f,aux2), Quaternion.identity).GetComponent<Bomb>();
+            tempBomb.Die = SubtractBombAmount;
+            tempBomb.explotionRadio = explotionRatio;
+            bombAmount++;
         }
 
     }
@@ -89,5 +93,8 @@ public class Player3rdPersonControl : MonoBehaviour
         GameManager.Get().GameOver(0);
     }
 
-
+    void SubtractBombAmount()
+    {
+        bombAmount--;
+    }
 }

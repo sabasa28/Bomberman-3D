@@ -9,20 +9,23 @@ public class GameplayController : MonoBehaviour
     public GameObject chunkNotDestroyable;
     public GameObject enemy;
     public GameObject door;
-    public int enemyCurrentAmount = 0;
+    Player3rdPersonControl player;
 
-
-    bool doorCreated = false;
     public int mapWidth;
     public int mapDepth;
-    public int enemyTargetAmount;
 
-    int chunkSize = 10;
+    public int enemyCurrentAmount = 0;
+    public int enemyTargetAmount;
+    bool doorCreated = false;
     int chunkOffset;
 
-    List<GameObject> mapChunks = new List<GameObject>(); //necesario?
+    public static int chunkSize = 10;
+
+    List<GameObject> mapChunks = new List<GameObject>();
+
     void Start()
-    { 
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player3rdPersonControl>();
         chunkOffset = chunkSize / 2;
         InstantiateMap();
         InstantiateEnemies();
@@ -46,7 +49,7 @@ public class GameplayController : MonoBehaviour
 
                 if (aux == 1 && !doorCreated && Random.Range(0, 7) == 0)
                 {
-                    Instantiate(door, new Vector3(i * chunkSize + chunkOffset, 1, j * chunkSize + chunkOffset), Quaternion.identity).GetComponent<checkWin>().checkIfWin=checkGameOver;
+                    Instantiate(door, new Vector3(i * chunkSize + chunkOffset, 1, j * chunkSize + chunkOffset), Quaternion.identity).GetComponent<checkWin>().checkIfWin=CheckGameOver;
                     
                     doorCreated = true;
                 }
@@ -84,17 +87,17 @@ public class GameplayController : MonoBehaviour
             int aux = Random.Range(0, freeSpaces.Count - 1);
             GameObject go= Instantiate(enemy, new Vector3(chunkSize * (freeSpaces[aux] / mapDepth) + chunkOffset, chunkOffset, chunkSize * (freeSpaces[aux] % mapDepth) + chunkOffset), Quaternion.identity);
             enemyCurrentAmount++;
-            go.GetComponent<Enemy>().updateEnemyAmount = subtractEnemyAmount;
+            go.GetComponent<Enemy>().updateEnemyAmount = SubtractEnemyAmount;
             freeSpaces.RemoveAt(aux);
         }
     }
 
-    void subtractEnemyAmount()
+    void SubtractEnemyAmount()
     {
         enemyCurrentAmount--;
     }
 
-    void checkGameOver()
+    void CheckGameOver()
     {
         if (enemyCurrentAmount == 0)
         {
