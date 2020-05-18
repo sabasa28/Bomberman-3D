@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -12,6 +13,7 @@ public class Enemy : MonoBehaviour
     public float rayDistance = 10;
     public LayerMask rayCastLayer;
     RaycastHit hit;
+    public Action updateEnemyAmount;
 
     bool left = true;
     bool right = true;
@@ -104,7 +106,7 @@ public class Enemy : MonoBehaviour
             {
                 do
                 {
-                    int rand = Random.Range(0, 4);
+                    int rand = UnityEngine.Random.Range(0, 4);
                     switch (rand)
                     {
                         case 0:
@@ -156,5 +158,10 @@ public class Enemy : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void OnDestroy()
+    {
+        updateEnemyAmount();
     }
 }

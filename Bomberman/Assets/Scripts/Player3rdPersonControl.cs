@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public class Player3rdPersonControl : MonoBehaviour
     float ver;
     Vector3 initPos;
     Rigidbody rb;
+    int lives = 2;
     void Start()
     {
         initPos = transform.position;
@@ -65,6 +67,9 @@ public class Player3rdPersonControl : MonoBehaviour
         if (other.CompareTag("Explotion"))
         {
             transform.position = initPos;
+            lives--;
+            if (lives == 0) gameOver();
+
         }
     }
     private void OnCollisionEnter(Collision collision)
@@ -73,7 +78,15 @@ public class Player3rdPersonControl : MonoBehaviour
         {
             transform.position = initPos;
             rb.velocity = Vector3.zero;
+            lives--;
+            if (lives == 0) gameOver();
+
         }
+    }
+
+    void gameOver()
+    {
+        GameManager.Get().GameOver(0);
     }
 
 
