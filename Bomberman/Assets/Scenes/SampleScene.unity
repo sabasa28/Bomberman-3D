@@ -230,6 +230,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bomb: {fileID: 8312776146920961730, guid: 1ad37dd7675ad4540a61d6a38b089ada, type: 3}
   speed: 25
+  lives: 2
+  explotionRatio: 2
+  maxBombAmount: 1
 --- !u!54 &279542437
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -282,9 +285,9 @@ MonoBehaviour:
     type: 3}
   enemy: {fileID: 4656501215504291727, guid: 6cb72c3cd1846094fa0b2a8ffa2c4a21, type: 3}
   door: {fileID: 3709764598632597896, guid: 516f28748c5f1174c86b994f294a94f5, type: 3}
-  enemyCurrentAmount: 0
   mapWidth: 13
   mapDepth: 9
+  enemyCurrentAmount: 0
   enemyTargetAmount: 5
 --- !u!4 &610936996
 Transform:

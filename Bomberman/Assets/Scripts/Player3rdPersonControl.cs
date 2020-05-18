@@ -33,12 +33,12 @@ public class Player3rdPersonControl : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space)&&bombAmount<maxBombAmount)
         {
-            float aux1 = (transform.position.x+5) % 10;
-            if (aux1 > 5) aux1 = transform.position.x + (10.0f - aux1);
+            float aux1 = (transform.position.x+ GameplayController.chunkOffset) % GameplayController.chunkSize;
+            if (aux1 > 5) aux1 = transform.position.x + (GameplayController.chunkSize - aux1);
             else aux1 = transform.position.x - aux1;
 
-            float aux2 = (transform.position.z+5) % 10;
-            if (aux2 > 5) aux2 = transform.position.z + (10.0f - aux2);
+            float aux2 = (transform.position.z+ GameplayController.chunkOffset) % GameplayController.chunkSize;
+            if (aux2 > 5) aux2 = transform.position.z + (GameplayController.chunkSize - aux2);
             else aux2 = transform.position.z - aux2;
             Bomb tempBomb= Instantiate(bomb, new Vector3(aux1,2.5f,aux2), Quaternion.identity).GetComponent<Bomb>();
             tempBomb.Die = SubtractBombAmount;
@@ -49,19 +49,19 @@ public class Player3rdPersonControl : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        float aux = (transform.position.z + 5) % 20;
+        float aux = (transform.position.z + GameplayController.chunkOffset) % (GameplayController.chunkSize*2);
 
         if (aux > 14 || aux < 6)
         {
-            if (aux > 10.0f && ver != 0) transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, transform.position.y, (transform.position.z) + (20.0f - aux)), 0.1f);
-            if (aux <= 10.0f && ver != 0) transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, transform.position.y, (transform.position.z) - aux), 0.1f);
+            if (aux > GameplayController.chunkSize && ver != 0) transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, transform.position.y, (transform.position.z) + ((GameplayController.chunkSize*2) - aux)), 0.1f);
+            if (aux <= GameplayController.chunkSize && ver != 0) transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, transform.position.y, (transform.position.z) - aux), 0.1f);
         }
-        aux = (transform.position.x + 5) % 20;
+        aux = (transform.position.x + GameplayController.chunkOffset) % (GameplayController.chunkSize*2);
 
         if (aux > 14 || aux < 6)
         {
-            if (aux > 10.0f && hor != 0) transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x + (20.0f - aux), transform.position.y, transform.position.z), 0.1f);
-            if (aux <= 10.0f && hor != 0) transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x - aux, transform.position.y, transform.position.z), 0.1f);
+            if (aux > GameplayController.chunkSize && hor != 0) transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x + ((GameplayController.chunkSize*2) - aux), transform.position.y, transform.position.z), 0.1f);
+            if (aux <= GameplayController.chunkSize && hor != 0) transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x - aux, transform.position.y, transform.position.z), 0.1f);
         }
         Vector3 movement = new Vector3(ver, 0, -hor) * speed;
         transform.position += movement * Time.deltaTime;

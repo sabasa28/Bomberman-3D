@@ -17,9 +17,9 @@ public class GameplayController : MonoBehaviour
     public int enemyCurrentAmount = 0;
     public int enemyTargetAmount;
     bool doorCreated = false;
-    int chunkOffset;
 
     public static int chunkSize = 10;
+    public static int chunkOffset;
 
     List<GameObject> mapChunks = new List<GameObject>();
 

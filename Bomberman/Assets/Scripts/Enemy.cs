@@ -31,17 +31,17 @@ public class Enemy : MonoBehaviour
         if (moving)
         {
             transform.position += movement * speed * Time.deltaTime;
-            float aux1 = (transform.position.z + 5) % 20;
+            float aux1 = (transform.position.z + GameplayController.chunkOffset) % (GameplayController.chunkSize*2);
             if (aux1 > 15 || aux1 < 5)
             {
-                if (aux1 > 10.0f && movement.z == 0) transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, transform.position.y, (transform.position.z) + (20.0f - aux1)), 0.05f);
+                if (aux1 > 10.0f && movement.z == 0) transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, transform.position.y, (transform.position.z) + ((GameplayController.chunkSize*2) - aux1)), 0.05f);
                 if (aux1 <= 10.0f && movement.z == 0) transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, transform.position.y, (transform.position.z) - aux1), 0.05f);
             }
 
-            aux1 = (transform.position.x + 5) % 20;
+            aux1 = (transform.position.x + 5) % (GameplayController.chunkSize*2);
             if (aux1 > 15 || aux1 < 5)
             {
-                if (aux1 > 10.0 && movement.x == 0) transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x + (20.0f - aux1), transform.position.y, transform.position.z), 0.05f);
+                if (aux1 > 10.0 && movement.x == 0) transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x + ((GameplayController.chunkSize*2) - aux1), transform.position.y, transform.position.z), 0.05f);
                 if (aux1 <= 10.0f && movement.x == 0) transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x - aux1, transform.position.y, transform.position.z), 0.05f);
             }
         }

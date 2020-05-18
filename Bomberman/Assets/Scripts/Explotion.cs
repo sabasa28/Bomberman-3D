@@ -29,22 +29,22 @@ public class Explotion : MonoBehaviour
             switch (sideToInsantiate)
             {
                 case Side.left:
-                    Explotion temp = Instantiate(explotion, new Vector3(transform.position.x, transform.position.y, transform.position.z - 10), Quaternion.identity).GetComponent<Explotion>();
+                    Explotion temp = Instantiate(explotion, new Vector3(transform.position.x, transform.position.y, transform.position.z - GameplayController.chunkSize), Quaternion.identity).GetComponent<Explotion>();
                     temp.explotionsLeft = explotionsLeft - 1;
                     temp.sideToInsantiate = sideToInsantiate;
                     break;
                 case Side.right:
-                    Explotion temp1 = Instantiate(explotion, new Vector3(transform.position.x, transform.position.y, transform.position.z + 10), Quaternion.identity).GetComponent<Explotion>();
+                    Explotion temp1 = Instantiate(explotion, new Vector3(transform.position.x, transform.position.y, transform.position.z + GameplayController.chunkSize), Quaternion.identity).GetComponent<Explotion>();
                     temp1.explotionsLeft = explotionsLeft - 1;
                     temp1.sideToInsantiate = sideToInsantiate;
                     break;
                 case Side.forward:
-                    Explotion temp2 = Instantiate(explotion, new Vector3(transform.position.x + 10, transform.position.y, transform.position.z), Quaternion.identity).GetComponent<Explotion>();
+                    Explotion temp2 = Instantiate(explotion, new Vector3(transform.position.x + GameplayController.chunkSize, transform.position.y, transform.position.z), Quaternion.identity).GetComponent<Explotion>();
                     temp2.explotionsLeft = explotionsLeft - 1;
                     temp2.sideToInsantiate = sideToInsantiate;
                     break;
                 case Side.back:
-                    Explotion temp3 = Instantiate(explotion, new Vector3(transform.position.x - 10, transform.position.y, transform.position.z), Quaternion.identity).GetComponent<Explotion>();
+                    Explotion temp3 = Instantiate(explotion, new Vector3(transform.position.x - GameplayController.chunkSize, transform.position.y, transform.position.z), Quaternion.identity).GetComponent<Explotion>();
                     temp3.explotionsLeft = explotionsLeft - 1;
                     temp3.sideToInsantiate = sideToInsantiate;
                     break;
